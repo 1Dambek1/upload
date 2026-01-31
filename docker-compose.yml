@@ -2,15 +2,18 @@ networks:
   back:
 
 services:
-  nginx: nginx:stable-alpine
-  ports:
-    - "80:80"
-  depends_on:
-    - backend
-  volumes:
-    - "./nginx.conf:/etc/nginx/nginx.conf"
-  networks:
-    - back
+  nginx_server:
+    nginx: nginx:stable-alpine
+    container_name: nginx_server
+
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+    networks:
+      - back
 
   backend:
     build: .
